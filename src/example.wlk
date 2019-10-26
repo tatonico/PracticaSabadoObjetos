@@ -26,15 +26,14 @@ class Carpeta{
 	}
 	
 	method crear(nombreArchivo){
-		var nuevoArchivo = new Archivo(nombreArchivo, "")
-		archivos.add(nuevoArchivo)
+		archivos.add(new Archivo(nombreArchivo, ""))
 	}
 	
 	method eliminar(nombreArchivo){
 		archivos.remove(self.encontrarArchivoConNombre(nombreArchivo))
 	}
 	
-	method agregar(nombreArchivo,textoAAgregar){
+	method agregarTextoA(nombreArchivo,textoAAgregar){
 		self.encontrarArchivoConNombre(nombreArchivo).agregarAContenido(textoAAgregar)
 	}
 	

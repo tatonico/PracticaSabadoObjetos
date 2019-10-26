@@ -4,14 +4,20 @@ class Commit {
 	var property descripcion
 	
 	method aplicarCambios(carpeta){
-		cambios.map{cambio => cambio.aplicarseEn(carpeta)}
+		cambios.foreach{cambio => cambio.aplicarseEn(carpeta)}
 	}
 	
 	method afectaAlArchivo(archivo){
-		cambios.any{cambio => cambio.afectaAlArchivo(archivo)}
+		return cambios.any{cambio => cambio.afectaAlArchivo(archivo)}
 	}
 	method informarAutor(persona){
 		autor = persona
+	}
+	method cambiarDescripcion(nueva){
+		descripcion = nueva
+	}
+	method establecerCambiosReversos(){
+		cambios.foreach{cambio=>cambio.obtenerReverso()}.reverse()
 	}
 }
 
@@ -22,7 +28,7 @@ class Cambio{
 	method obtenerReverso()
 	
 	method afectaAlArchivo(archivo){
-		nombreArchivo.equals(archivo)
+		return nombreArchivo.equals(archivo)
 	}
 }
 
@@ -33,6 +39,8 @@ class Crear inherits Cambio{
 	override method aplicarseEn(carpeta){
 		if(carpeta.contieneArchivo(nombreArchivo).negate()){
 			carpeta.crear(nombreArchivo)
+		}else{
+			throw new Exception(message="No existe archivo")
 		}
 	}
 	override method obtenerReverso(){
@@ -64,7 +72,7 @@ class Agregar inherits Cambio{
 	
 	override method aplicarseEn(carpeta){
 		if(carpeta.contieneArchivo(nombreArchivo)){
-			carpeta.agregar(nombreArchivo, texto)
+			carpeta.agregarTextoA(nombreArchivo, texto)
 		}else{
 			throw new Exception(message="No existe archivo")
 		}

@@ -4,14 +4,13 @@ class Autor {
 	
 	method agregarCommit(branch, commit){
 		if(branch.personaPuedeCommitear(self)){
-			commit.informarAutor(self)
 			branch.agregarCommit(commit)
 		}
 	}
 	
 	method convertirEnAdminA(conjunto){
 		if(self.esAdmin()){
-			conjunto.map{persona => persona.hacerAdmin()}
+			conjunto.foreach{persona => persona.hacerAdmin()}
 		}
 	}
 	
